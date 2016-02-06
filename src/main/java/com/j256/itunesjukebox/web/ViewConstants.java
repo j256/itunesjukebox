@@ -14,6 +14,8 @@ public class ViewConstants {
 	public static final String ARTIST_TRACKS = CONTROLLER_ROOT + "/artists/tracks.html";
 	public static final String GENRES_ALL = CONTROLLER_ROOT + "/genres/index.html";
 	public static final String GENRE_TRACKS = CONTROLLER_ROOT + "/genres/tracks.html";
+	public static final String YEARS_ALL = CONTROLLER_ROOT + "/years/index.html";
+	public static final String YEAR_TRACKS = CONTROLLER_ROOT + "/years/tracks.html";
 	public static final String SONGS = CONTROLLER_ROOT + "/songs/index.html";
 	public static final String SONGS_ONE = CONTROLLER_ROOT + "/songs/one.html";
 	public static final String VIDEOS = CONTROLLER_ROOT + "/videos.html";

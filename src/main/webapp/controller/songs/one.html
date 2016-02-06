@@ -9,7 +9,7 @@
 	<tr><td align="right"> Artist: </td><td> <a href="/artists/one?name=${track.artist?url}" >${track.artist}</a> </td></tr>
 	<tr><td align="right"> Genre: </td><td> <a href="/genres/one?name=${track.genre?url}" >${track.genre}</a>
 		[#if track.year > 0 ]
-			from ${track.year?c}
+			from <a href="/years/one?year=${track.year?c}">${track.year?c}</a>
 		[/#if]
 	</td></tr>
 	<tr><td align="right"> # Votes: </td><td> <span id="voteCount">${track.voteCount?c}</span> <span id="voted" style="display:none;"><b>voted</b></span> </td></tr>

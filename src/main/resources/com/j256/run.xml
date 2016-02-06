@@ -62,6 +62,7 @@
 				<ref bean="genreController" />
 				<ref bean="songController" />
 				<ref bean="ajaxController" />
+				<ref bean="yearController" />
 			</array>
 		</property>
 		<property name="resultDisplayers">
@@ -95,6 +96,9 @@
 		<property name="adminController" ref="adminController" />
 	</bean>
 	<bean id="genreController" class="com.j256.itunesjukebox.web.GenreController">
+		<property name="adminController" ref="adminController" />
+	</bean>
+	<bean id="yearController" class="com.j256.itunesjukebox.web.YearController">
 		<property name="adminController" ref="adminController" />
 	</bean>
 	<bean id="ajaxController" class="com.j256.itunesjukebox.web.AjaxController">

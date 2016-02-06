@@ -19,13 +19,13 @@ import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.freemarker.ModelView;
 
 /**
- * Controller that handles genre functions.
+ * Controller that handles year functions.
  * 
  * @author graywatson
  */
 @WebService
-@Path("/genres")
-public class GenreController {
+@Path("/years")
+public class YearController {
 
 	private static TrackNameComparator trackNameComparator = new TrackNameComparator();
 
@@ -40,43 +40,46 @@ public class GenreController {
 			System.err.println("No tracks returned");
 			return null;
 		}
-		Map<String, Integer> artistCountMap = new HashMap<String, Integer>();
+		Map<Integer, Integer> yearCountMap = new HashMap<Integer, Integer>();
 		for (Track track : tracks) {
-			Integer count = artistCountMap.get(track.getGenre());
+			if (track.getYear() == 0) {
+				continue;
+			}
+			Integer count = yearCountMap.get(track.getYear());
 			if (count == null) {
 				count = 0;
 			}
-			artistCountMap.put(track.getGenre(), count + 1);
+			yearCountMap.put(track.getYear(), count + 1);
 		}
 
-		List<NameInfo> genreInfos = new ArrayList<NameInfo>();
-		for (Map.Entry<String, Integer> entry : artistCountMap.entrySet()) {
-			genreInfos.add(new NameInfo(entry.getKey(), entry.getValue()));
+		List<NameInfo> yearInfos = new ArrayList<NameInfo>();
+		for (Map.Entry<Integer, Integer> entry : yearCountMap.entrySet()) {
+			yearInfos.add(new NameInfo(Integer.toString(entry.getKey()), entry.getValue()));
 		}
-		Collections.sort(genreInfos);
+		Collections.sort(yearInfos);
 
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("genreInfos", genreInfos);
-		return new ModelView(model, ViewConstants.GENRES_ALL);
+		model.put("yearInfos", yearInfos);
+		return new ModelView(model, ViewConstants.YEARS_ALL);
 	}
 
 	@Path("/one")
 	@GET
 	@WebMethod
-	public ModelView one(@QueryParam("name") String name) {
+	public ModelView one(@QueryParam("year") int year) {
 		Track[] tracks = adminController.getTracks();
-		List<Track> genreTracks = new ArrayList<Track>();
+		List<Track> yearTracks = new ArrayList<Track>();
 		for (Track track : tracks) {
-			if (track.getGenre().equals(name)) {
-				genreTracks.add(track);
+			if (track.getYear() == year) {
+				yearTracks.add(track);
 			}
 		}
-		Collections.sort(genreTracks, trackNameComparator);
+		Collections.sort(yearTracks, trackNameComparator);
 
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("genreName", name);
-		model.put("genreTracks", genreTracks);
-		return new ModelView(model, ViewConstants.GENRE_TRACKS);
+		model.put("year", year);
+		model.put("yearTracks", yearTracks);
+		return new ModelView(model, ViewConstants.YEAR_TRACKS);
 	}
 
 	@Required

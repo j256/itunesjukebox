@@ -1,6 +1,5 @@
 - test with android
 - progress bar or other feature to showing track position
-- add list by year
 - better css lists (light/dark shading on rows)
 - handle moving off of the playlist better
 - show the times of the tracks

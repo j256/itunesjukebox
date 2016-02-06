@@ -15,7 +15,7 @@
 			<td> <a href="/artists/one?name=${track.artist?url}" >${track.artist}</a> </td>
 			<td align="right">
 				[#if track.year > 0]
-					${track.year?c}
+					<a href="/years/one?year=${track.year?c}">${track.year?c}</a>
 				[#else]
 					&nbsp;
 				[/#if]

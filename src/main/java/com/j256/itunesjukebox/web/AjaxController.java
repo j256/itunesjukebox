@@ -59,6 +59,8 @@ public class AjaxController {
 		} else {
 			if (up) {
 				return "track vote changed to " + track.incrementVoteCount();
+			} else	if (session.getAttribute(SessionConstants.ADMIN) == null) {
+				return "no permissions to downvote track";
 			} else {
 				return "track vote changed to " + track.decrementVoteCount();
 			}
