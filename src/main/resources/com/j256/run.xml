@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definitions of our JMX related beans -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:/com/j256/common.xml" />
+
+	<!-- configurer (replaces ${...} with system props) -->
+	<bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>
+					classpath:/com/j256/javajukebox.properties
+				</value>
+			</list>
+		</property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+	</bean>
+
+	<!-- checks for the @Required annotations -->
+	<bean id="requiredAnnotationBeanPostProcessor" class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+
+	<bean id="webServer" class="com.j256.common.web.WebServer">
+		<property name="serverPort" value="${jukebox.webserver.serverPort}" />
+		<property name="handler" ref="loggingHandler" />
+	</bean>
+
+	<bean id="loggingHandler" class="com.j256.simplewebframework.logger.LocalLoggingHandler">
+		<property name="handler" ref="mainHandlerCollection" />
+	</bean>
+
+	<bean id="mainHandlerCollection" class="org.eclipse.jetty.server.handler.HandlerCollection">
+		<property name="handlers">
+			<array>
+				<!-- controllers -->
+				<ref bean="rootServiceSessionHandler" />
+				<!-- static files -->
+				<ref bean="localResourceHandler" />
+				<!-- catch-all -->
+				<ref bean="defaultHandler" />
+			</array>
+		</property>
+	</bean>
+
+	<bean id="defaultHandler" class="com.j256.common.web.LocalDefaultHandler" />
+
+	<bean id="sessionManager" class="org.eclipse.jetty.server.session.HashSessionManager">
+		<property name="sessionCookie" value="${jukebox.webserver.sessionCookieName}" />
+	</bean>
+
+	<bean id="rootServiceSessionHandler" class="org.eclipse.jetty.server.session.SessionHandler">
+		<property name="sessionManager" ref="sessionManager" />
+		<property name="handler" ref="rootServiceHandler" />
+	</bean>
+
+	<bean id="rootServiceHandler" class="com.j256.simplewebframework.handler.ServiceHandler">
+		<property name="webServices">
+			<array>
+				<ref bean="rootController" />
+				<ref bean="adminController" />
+				<ref bean="artistController" />
+				<ref bean="genreController" />
+				<ref bean="songController" />
+				<ref bean="ajaxController" />
+			</array>
+		</property>
+		<property name="resultDisplayers">
+			<array>
+				<ref bean="stringResultDisplayer" />
+				<ref bean="freemarkerHtmlDisplayer" />
+				<ref bean="redirectResultDisplayer" />
+				<ref bean="binaryResultDisplayer" />
+				<ref bean="jsonResultDisplayer" />
+			</array>
+		</property>
+	</bean>
+
+	<bean id="localResourceHandler" class="com.j256.simplewebframework.resource.LocalResourceHandler">
+		<property name="fileLocator" ref="fileLocator" />
+		<property name="defaultResultDisplayer" ref="defaultResultDisplayer" />
+		<property name="fileExtensionDisplayers">
+			<map>
+				<entry key="html" value-ref="freemarkerHtmlDisplayer" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- =================================================================================== -->
+
+	<bean id="rootController" class="com.j256.javajukebox.web.RootController">
+		<property name="adminController" ref="adminController" />
+	</bean>
+	<bean id="adminController" class="com.j256.javajukebox.web.AdminController" />
+	<bean id="artistController" class="com.j256.javajukebox.web.ArtistController">
+		<property name="adminController" ref="adminController" />
+	</bean>
+	<bean id="genreController" class="com.j256.javajukebox.web.GenreController">
+		<property name="adminController" ref="adminController" />
+	</bean>
+	<bean id="ajaxController" class="com.j256.javajukebox.web.AjaxController">
+		<property name="adminController" ref="adminController" />
+		<property name="playListAutomation" ref="playListAutomation" />
+	</bean>
+	<bean id="songController" class="com.j256.javajukebox.web.SongController">
+		<property name="adminController" ref="adminController" />
+	</bean>
+
+	<!-- =================================================================================== -->
+
+	<bean id="playListAutomation" class="com.j256.javajukebox.auto.PlayListAutomation">
+		<property name="adminController" ref="adminController" />
+	</bean>
+
+	<!-- =================================================================================== -->
+
+	<bean id="defaultResultDisplayer" class="com.j256.simplewebframework.displayer.FileResultDisplayer" />
+	<bean id="stringResultDisplayer" class="com.j256.simplewebframework.displayer.StringResultDisplayer" />
+	<bean id="freemarkerHtmlDisplayer" class="com.j256.simplewebframework.freemarker.FreemarkerHtmlDisplayer">
+		<property name="templateConfig" ref="freemarkerConfiguration" />
+		<property name="fileLocator" ref="fileLocator" />
+	</bean>
+	<bean id="redirectResultDisplayer" class="com.j256.simplewebframework.displayer.RedirectResultDisplayer" />
+	<bean id="binaryResultDisplayer" class="com.j256.simplewebframework.displayer.BinaryResultDisplayer" />
+	<bean id="jsonResultDisplayer" class="com.j256.simplewebframework.displayer.JsonResultDisplayer" />
+
+	<!-- =================================================================================== -->
+
+	<bean id="fileLocator" class="com.j256.simplewebframework.resource.FileLocator">
+		<property name="localDirectory" value="${jukebox.webserver.localDirectory}" />
+		<property name="welcomeFiles">
+			<array>
+				<value>index.html</value>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="freemarkerConfiguration" class="freemarker.template.Configuration">
+		<!-- we need to inject a templateLoader here and _not_ a directoryForTemplateLoading -->
+		<property name="templateLoader">
+			<bean class="com.j256.simplewebframework.freemarker.ClasspathTemplateLoader">
+				<property name="basePath" value="/" />
+			</bean>
+		</property>
+		<property name="objectWrapper">
+			<bean class="freemarker.template.DefaultObjectWrapper" />
+		</property>
+		<property name="URLEscapingCharset" value="UTF-8" />
+	</bean>
+
+</beans>

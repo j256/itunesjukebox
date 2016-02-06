@@ -1,0 +1,13 @@
+[#ftl][#include "/ftl/header.ftl"]
+
+<h1> Jukebox Admin </h1>
+
+<p> Select a playlist from the below list. </p>
+
+<ul>
+[#list playLists as playList]
+<li> <a href="chosen?playList=${playList}">${playList}</a> </li>
+[/#list]
+</ul>
+
+[#include "/ftl/footer.ftl"]

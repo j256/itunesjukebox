@@ -1,0 +1,13 @@
+- test with android
+- progress bar or other feature to showing track position
+- add list by year
+- better css lists
+- post to github
+- handle moving off of the playlist better
+- show the times of the tracks
+- show the current play time or maybe time left or something
+- fix multiple click buttons on admin page to use common code
+- recently played list
+- some way to persist votes for next time
+	- maybe have a total votes and a working votes
+ 
