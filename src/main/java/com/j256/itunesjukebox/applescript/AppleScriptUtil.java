@@ -1,4 +1,4 @@
-package com.j256.javajukebox.applescript;
+package com.j256.itunesjukebox.applescript;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 /**
  * Some constants for our session.

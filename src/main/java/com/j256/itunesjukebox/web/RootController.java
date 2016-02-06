@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ import org.eclipse.jetty.http.MimeTypes;
 import org.eclipse.jetty.io.Buffer;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.j256.javajukebox.applescript.Artwork;
-import com.j256.javajukebox.applescript.Track;
+import com.j256.itunesjukebox.applescript.Artwork;
+import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.displayer.BinaryResultDisplayer.BinaryResult;
 import com.j256.simplewebframework.freemarker.ModelView;
 

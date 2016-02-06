@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,17 +15,17 @@ import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.j256.javajukebox.applescript.Track;
+import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.freemarker.ModelView;
 
 /**
- * Controller that handles artist functions.
+ * Controller that handles genre functions.
  * 
  * @author graywatson
  */
 @WebService
-@Path("/artists")
-public class ArtistController {
+@Path("/genres")
+public class GenreController {
 
 	private static TrackNameComparator trackNameComparator = new TrackNameComparator();
 
@@ -35,43 +35,29 @@ public class ArtistController {
 	@GET
 	@WebMethod
 	public ModelView all() {
-		return search(null);
-	}
-
-	@Path("/search")
-	@GET
-	@WebMethod
-	public ModelView search(@QueryParam("query") String query) {
 		Track[] tracks = adminController.getTracks();
 		if (tracks == null) {
 			System.err.println("No tracks returned");
 			return null;
 		}
-		if (query != null) {
-			query = query.toLowerCase();
-		}
 		Map<String, Integer> artistCountMap = new HashMap<String, Integer>();
 		for (Track track : tracks) {
-			String artist = track.getArtist();
-			if (query != null && !artist.toLowerCase().contains(query)) {
-				continue;
-			}
-			Integer count = artistCountMap.get(artist);
+			Integer count = artistCountMap.get(track.getGenre());
 			if (count == null) {
 				count = 0;
 			}
-			artistCountMap.put(artist, count + 1);
+			artistCountMap.put(track.getGenre(), count + 1);
 		}
 
-		List<NameInfo> artistInfos = new ArrayList<NameInfo>();
+		List<NameInfo> genreInfos = new ArrayList<NameInfo>();
 		for (Map.Entry<String, Integer> entry : artistCountMap.entrySet()) {
-			artistInfos.add(new NameInfo(entry.getKey(), entry.getValue()));
+			genreInfos.add(new NameInfo(entry.getKey(), entry.getValue()));
 		}
-		Collections.sort(artistInfos);
+		Collections.sort(genreInfos);
 
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("artistInfos", artistInfos);
-		return new ModelView(model, ViewConstants.ARTISTS_ALL);
+		model.put("genreInfos", genreInfos);
+		return new ModelView(model, ViewConstants.GENRES_ALL);
 	}
 
 	@Path("/one")
@@ -79,21 +65,21 @@ public class ArtistController {
 	@WebMethod
 	public ModelView one(@QueryParam("name") String name) {
 		Track[] tracks = adminController.getTracks();
-		List<Track> artistTracks = new ArrayList<Track>();
+		List<Track> genreTracks = new ArrayList<Track>();
 		for (Track track : tracks) {
-			if (track.getArtist().equals(name)) {
-				artistTracks.add(track);
+			if (track.getGenre().equals(name)) {
+				genreTracks.add(track);
 			}
 		}
-		if (artistTracks.size() == 1) {
-			return new ModelView("redirect:" + PathConstants.SONGS_ONE + "?id=" + artistTracks.get(0).getId());
+		if (genreTracks.size() == 1) {
+			return new ModelView("redirect:" + PathConstants.SONGS_ONE + "?id=" + genreTracks.get(0).getId());
 		}
-		Collections.sort(artistTracks, trackNameComparator);
+		Collections.sort(genreTracks, trackNameComparator);
 
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("artistName", name);
-		model.put("artistTracks", artistTracks);
-		return new ModelView(model, ViewConstants.ARTIST_TRACKS);
+		model.put("genreName", name);
+		model.put("genreTracks", genreTracks);
+		return new ModelView(model, ViewConstants.GENRE_TRACKS);
 	}
 
 	@Required

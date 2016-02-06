@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +13,9 @@ import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.j256.javajukebox.applescript.AppleScriptUtil;
-import com.j256.javajukebox.applescript.Track;
-import com.j256.javajukebox.auto.PlayListAutomation;
+import com.j256.itunesjukebox.applescript.AppleScriptUtil;
+import com.j256.itunesjukebox.applescript.Track;
+import com.j256.itunesjukebox.auto.PlayListAutomation;
 import com.j256.simplewebframework.params.SessionParam;
 
 /**

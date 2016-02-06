@@ -1,4 +1,4 @@
-package com.j256.javajukebox.applescript;
+package com.j256.itunesjukebox.applescript;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;

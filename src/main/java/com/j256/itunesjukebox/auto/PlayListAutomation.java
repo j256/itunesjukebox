@@ -1,4 +1,4 @@
-package com.j256.javajukebox.auto;
+package com.j256.itunesjukebox.auto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +12,11 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.j256.javajukebox.applescript.AppleScriptUtil;
-import com.j256.javajukebox.applescript.PlayerState;
-import com.j256.javajukebox.applescript.PlayingInfo;
-import com.j256.javajukebox.applescript.Track;
-import com.j256.javajukebox.web.AdminController;
+import com.j256.itunesjukebox.applescript.AppleScriptUtil;
+import com.j256.itunesjukebox.applescript.PlayerState;
+import com.j256.itunesjukebox.applescript.PlayingInfo;
+import com.j256.itunesjukebox.applescript.Track;
+import com.j256.itunesjukebox.web.AdminController;
 
 /**
  * Does some automated playlist maintenance.

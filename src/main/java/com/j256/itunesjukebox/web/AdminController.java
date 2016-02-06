@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,9 +13,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
-import com.j256.javajukebox.applescript.AppleScriptUtil;
-import com.j256.javajukebox.applescript.Artwork;
-import com.j256.javajukebox.applescript.Track;
+import com.j256.itunesjukebox.applescript.AppleScriptUtil;
+import com.j256.itunesjukebox.applescript.Artwork;
+import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.freemarker.ModelView;
 import com.j256.simplewebframework.params.SessionParam;
 

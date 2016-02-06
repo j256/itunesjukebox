@@ -1,4 +1,4 @@
-package com.j256.javajukebox.applescript;
+package com.j256.itunesjukebox.applescript;
 
 /**
  * Artwork from the track.

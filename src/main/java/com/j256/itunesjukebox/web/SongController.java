@@ -1,4 +1,4 @@
-package com.j256.javajukebox.web;
+package com.j256.itunesjukebox.web;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.j256.javajukebox.applescript.Track;
+import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.freemarker.ModelView;
 
 /**
