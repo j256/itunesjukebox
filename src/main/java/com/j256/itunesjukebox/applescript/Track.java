@@ -80,8 +80,12 @@ public class Track implements Comparable<Track> {
 		return voteCount.get();
 	}
 
-	public void incrementVoteCount() {
-		voteCount.incrementAndGet();
+	public int incrementVoteCount() {
+		return changeVoteCount(+1);
+	}
+
+	public int decrementVoteCount() {
+		return changeVoteCount(-1);
 	}
 
 	public void clearVoteCount() {
@@ -141,5 +145,18 @@ public class Track implements Comparable<Track> {
 	public String toString() {
 		return "Track [id=" + id + ", index=" + index + ", name=" + name + ", artist=" + artist + ", year=" + year
 				+ ", plays=" + playCount.get() + ", votes=" + voteCount.get() + ", video=" + isVideo + "]";
+	}
+
+	private int changeVoteCount(int change) {
+		int current;
+		int adjusted;
+		do {
+			current = voteCount.get();
+			adjusted = current + change;
+			if (adjusted < 0) {
+				return 0;
+			}
+		} while (!voteCount.compareAndSet(current, adjusted));
+		return adjusted;
 	}
 }

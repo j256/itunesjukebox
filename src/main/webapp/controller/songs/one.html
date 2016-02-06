@@ -16,24 +16,38 @@
 	<tr><td align="right"> # Plays: </td><td> ${track.playCount?c} </td></tr>
 </table>
 
-<p> <img id="vote" src="/images/plus.png" height="64" alt="Vote for song" /> </p>
+<p>
+<img id="voteUp" src="/images/vote_up.png" height="64" alt="Vote for song" />
+[#if admin ]
+	<img id="voteDown" src="/images/vote_down.png" height="64" alt="Vote down for song" />
+[/#if]
+</p>
 <p> <img src="/artwork?id=${track.id?c}" alt="Album artwork" height="180" /> </p>
 
 <script>
 	var voteCount = ${track.voteCount?c};
-	$("#vote").click(function() {
-		voteCount++;
+	$("#voteUp").click(function(){ vote(true); }).mousedown(function() { $("#vote").fadeOut(50).fadeIn(50); }).css("cursor", "pointer");
+	$("#voteDown").click(function(){ vote(false); }).mousedown(function() { $("#voteDown").fadeOut(50).fadeIn(50); }).css("cursor", "pointer");
+	function vote(up) {
+		if (up) {
+			voteCount++;
+		} else {
+			voteCount--;
+			if (voteCount < 0) {
+				voteCount = 0;
+			}
+		}
 		console.log( "Clicked vote button.  voteCount = " + voteCount );
 		$("#voteCount").html(voteCount).fadeOut(50).fadeIn(50);
 		$("#voted").show();
 		$.ajax({
-			url: "/ajax/vote?id=${track.id?c}",
+			url: "/ajax/vote?id=${track.id?c}&up=" + up,
 			cache: false,
 			success: function(response) {
 				console.log("Server response: " + response );
 			}
 		});
-	}).mousedown(function() { $("#vote").fadeOut(50).fadeIn(50); }).css("cursor", "pointer");
+	}
 </script>
 
 [#include "/ftl/footer.ftl"]

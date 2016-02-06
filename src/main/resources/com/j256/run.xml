@@ -87,27 +87,27 @@
 
 	<!-- =================================================================================== -->
 
-	<bean id="rootController" class="com.j256.javajukebox.web.RootController">
+	<bean id="rootController" class="com.j256.itunesjukebox.web.RootController">
 		<property name="adminController" ref="adminController" />
 	</bean>
-	<bean id="adminController" class="com.j256.javajukebox.web.AdminController" />
-	<bean id="artistController" class="com.j256.javajukebox.web.ArtistController">
+	<bean id="adminController" class="com.j256.itunesjukebox.web.AdminController" />
+	<bean id="artistController" class="com.j256.itunesjukebox.web.ArtistController">
 		<property name="adminController" ref="adminController" />
 	</bean>
-	<bean id="genreController" class="com.j256.javajukebox.web.GenreController">
+	<bean id="genreController" class="com.j256.itunesjukebox.web.GenreController">
 		<property name="adminController" ref="adminController" />
 	</bean>
-	<bean id="ajaxController" class="com.j256.javajukebox.web.AjaxController">
+	<bean id="ajaxController" class="com.j256.itunesjukebox.web.AjaxController">
 		<property name="adminController" ref="adminController" />
 		<property name="playListAutomation" ref="playListAutomation" />
 	</bean>
-	<bean id="songController" class="com.j256.javajukebox.web.SongController">
+	<bean id="songController" class="com.j256.itunesjukebox.web.SongController">
 		<property name="adminController" ref="adminController" />
 	</bean>
 
 	<!-- =================================================================================== -->
 
-	<bean id="playListAutomation" class="com.j256.javajukebox.auto.PlayListAutomation">
+	<bean id="playListAutomation" class="com.j256.itunesjukebox.auto.PlayListAutomation">
 		<property name="adminController" ref="adminController" />
 	</bean>
 

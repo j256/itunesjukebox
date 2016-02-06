@@ -53,7 +53,9 @@ public class AdminController {
 	@GET
 	@WebMethod
 	public ModelView login() {
-		return new ModelView(ViewConstants.ADMIN_LOGIN);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("initialized", (adminPassword != null));
+		return new ModelView(model, ViewConstants.ADMIN_LOGIN);
 	}
 
 	@Path("/login/submit")
@@ -76,7 +78,7 @@ public class AdminController {
 	@WebMethod
 	public ModelView playlists(@SessionParam HttpSession session) {
 		if (session.getAttribute(SessionConstants.ADMIN) == null) {
-			throw new SecurityException("Need to be admin user");
+			return new ModelView("redirect:" + PathConstants.ADMIN_LOGIN);
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("playLists", AppleScriptUtil.listPlayLists());
@@ -88,7 +90,7 @@ public class AdminController {
 	@WebMethod
 	public ModelView choosePlaylist(@SessionParam HttpSession session, @FormParam("playList") String playList) {
 		if (session.getAttribute(SessionConstants.ADMIN) == null) {
-			throw new SecurityException("Need to be admin user");
+			return new ModelView("redirect:" + PathConstants.ADMIN_LOGIN);
 		}
 
 		AppleScriptUtil.stop();
@@ -120,6 +122,8 @@ public class AdminController {
 		this.trackMap = trackMap;
 
 		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("playlist", playList);
+		model.put("tempPlaylist", TMP_PLAYLIST);
 		model.put("tracks", tracks);
 		return new ModelView(model, ViewConstants.PLAYLIST_CHOSEN);
 	}

@@ -41,7 +41,7 @@ public class AjaxController {
 	@Path("/vote")
 	@GET
 	@WebMethod
-	public String vote(@QueryParam("id") int id, @SessionParam HttpSession session) {
+	public String vote(@QueryParam("id") int id, @QueryParam("up") boolean up, @SessionParam HttpSession session) {
 		@SuppressWarnings("unchecked")
 		Set<Integer> voteSet = (Set<Integer>) session.getAttribute(SessionConstants.VOTE_SET);
 		if (voteSet == null) {
@@ -57,8 +57,11 @@ public class AjaxController {
 			System.err.println("Could not find track id #" + id);
 			return "Could not find track id #" + id;
 		} else {
-			track.incrementVoteCount();
-			return "track vote increased to " + track.getVoteCount();
+			if (up) {
+				return "track vote changed to " + track.incrementVoteCount();
+			} else {
+				return "track vote changed to " + track.decrementVoteCount();
+			}
 		}
 	}
 

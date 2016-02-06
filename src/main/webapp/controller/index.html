@@ -1,11 +1,15 @@
 [#ftl][#assign headerStuff = "<script src=\"/js/menu.js\"></script>" ][#include "/ftl/header.ftl"]
 
-<table border="1" cellpadding="3">
-	<tr><th colspan="3"> What's Playing </th></tr>
-	<tr><th> Name </th><th> Artist </th><th> Votes </th></tr>
-	<tbody id="menuRows">
-	</tbody>
-</table>
+[#if initialized ]
+	<table border="1" cellpadding="3">
+		<tr><th colspan="3"> What's Playing </th></tr>
+		<tr><th> Name </th><th> Artist </th><th> Votes </th></tr>
+		<tbody id="menuRows">
+		</tbody>
+	</table>
+[#else]
+	<p><a href="/admin/playlists/">To start you need to choose a playlist to initialize.</a></p>
+[/#if]
 
 [#assign endLinks = "<p> <a href=\"/admin/\" >Admin</a> </p>" ]
 

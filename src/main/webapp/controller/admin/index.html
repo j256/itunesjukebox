@@ -1,12 +1,10 @@
 [#ftl][#include "/ftl/header.ftl"]
 
-<h1> Jukebox Admin </h1>
+<h1> iTunesJukeBox Admin </h1>
 
-<p>
-	[#if ! initialized ]
-		<a href="playlists/">Choose playlist to initialize</a>
-	[/#if]
-</p>
+[#if ! initialized ]
+	<p><a href="playlists/">To start you need to choose a playlist to initialize.</a></p>
+[/#if]
 
 <p>
 <img id="pause" src="/images/pause.png" width="64" height="64" alt="Pause" />

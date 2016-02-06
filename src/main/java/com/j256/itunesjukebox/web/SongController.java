@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.j256.itunesjukebox.applescript.Track;
 import com.j256.simplewebframework.freemarker.ModelView;
+import com.j256.simplewebframework.params.SessionParam;
 
 /**
  * Controller that handles song functions.
@@ -68,7 +70,7 @@ public class SongController {
 	@Path("/one")
 	@GET
 	@WebMethod
-	public ModelView song(@QueryParam("id") int id, @Context HttpServletResponse response) {
+	public ModelView song(@SessionParam HttpSession session, @QueryParam("id") int id, @Context HttpServletResponse response) {
 		Track[] trackInfos = adminController.getTracks();
 		Track found = null;
 		for (Track track : trackInfos) {
@@ -84,6 +86,7 @@ public class SongController {
 		addNoCacheHeaders(response);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("track", found);
+		model.put("admin", (session.getAttribute(SessionConstants.ADMIN) != null));
 		return new ModelView(model, ViewConstants.SONGS_ONE);
 	}
 

@@ -37,7 +37,9 @@ public class RootController {
 	@GET
 	@WebMethod
 	public ModelView root() {
-		return new ModelView(ViewConstants.ROOT);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("initialized", (adminController.getTracks() != null));
+		return new ModelView(model, ViewConstants.ROOT);
 	}
 
 	@Path("/artwork")

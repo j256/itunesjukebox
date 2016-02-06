@@ -4,8 +4,12 @@
 
 <p> <a href="/">Menu</a> <a href="/admin/" >Admin</a> <p>
 
+<p> The following tracks have been copied from the playlist '${playlist}' and are now available to be played
+by the application.  The temporary playlist '${tempPlaylist}' has been created and cleared and will be used
+to play and queue tracks. </p>
+
 <table border="1">
-	<tr><th> Id </th><th> Library Id </th><th> Name </th><th> Artist </th><th> Year </th></tr>
+	<tr><th> Id </th><th> Library Id </th><th> Name </th><th> Artist </th><th> Year </th><th> &nbsp; </th></tr>
 	[#list tracks as track]
 		<tr>
 			<td align="right"> ${track.id?c} </td>
