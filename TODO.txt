@@ -1,8 +1,5 @@
 - test with android
 - progress bar or other feature to showing track position
-- better css lists (light/dark shading on rows)
-- handle moving off of the playlist better
-	- maybe see what playlist is playing each time and if not tmp then stop
 - show the times of the tracks
 - show the current play time or maybe time left or something
 - some way to persist votes for next time

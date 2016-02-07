@@ -6,7 +6,7 @@ $(document).ready(function() {
 	var intervalMillis = 3000;
 	var refresh = function() {
 		$.getJSON("/ajax/whatsPlaying", function(tracks) {
-			var rows = [];
+			var rows = [ "<tr><th> Playing Name </th><th> Artist </th><th> Votes </th></tr>\n" ];
 			tracks.forEach(function(track) {
 				var row = "<tr><td> <a href=\"/songs/one?id=" + track.id + "\">" + track.name + "</a> ";
 				if (track.isVideo) {

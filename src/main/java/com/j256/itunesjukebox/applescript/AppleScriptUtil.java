@@ -352,11 +352,14 @@ public class AppleScriptUtil {
 	 * Load any track artwork from the disk.
 	 */
 	public static Artwork loadTrackArtwork(Track track, String playList) throws IOException {
+		char leftDoubleAngleQuotation = 171; // character version of <<
+		char rightDoubleAngleQuotation = 187; // character version of >>
 		String results = runCommand(//
 				"tell artwork 1 of track id " + track.getLibraryId() + " of user playlist \"" //
 						+ playList + "\"\n" //
 						+ "   set srcBytes to raw data\n" //
-						+ "   if format is <<class PNG>> then\n" //
+						+ "   if format is " + leftDoubleAngleQuotation + "class PNG " + rightDoubleAngleQuotation
+						+ " then\n" //
 						+ "      set ext to \"png\"\n" //
 						+ "   else\n" //
 						+ "      set ext to \"jpg\"\n" //

@@ -21,3 +21,22 @@ a, .button {
     padding:3px;
     text-decoration: none;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-of-type(odd) {
+	background-color: #F2F2F2;
+}
+
+th {
+    background-color: #F2F2F2;
+    text-align: center;
+}

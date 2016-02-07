@@ -110,6 +110,11 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 			} else {
 				System.out.println("Playing status is: " + playingInfo);
 			}
+			if (playingInfo.getId() < 0) {
+				// we aren't playing the right playlist all of a sudden, bail
+				System.err.println("ERROR: We aren't playing in playlist: " + AdminController.TMP_PLAYLIST);
+				return;
+			}
 			// remove any other tracks before it, adding 1 to their play-count
 			for (int i = 1; i < playingInfo.getIndex(); i++) {
 				// remove the first one X times, not i
