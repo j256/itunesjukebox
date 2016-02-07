@@ -46,7 +46,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<finalName>jilter</finalName>
+							<finalName>itunesjukebox</finalName>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>com.j256.common.main.Main</mainClass>

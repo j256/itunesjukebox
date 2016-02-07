@@ -356,7 +356,7 @@ public class AppleScriptUtil {
 				"tell artwork 1 of track id " + track.getLibraryId() + " of user playlist \"" //
 						+ playList + "\"\n" //
 						+ "   set srcBytes to raw data\n" //
-						+ "   if format is «class PNG » then\n" //
+						+ "   if format is <<class PNG>> then\n" //
 						+ "      set ext to \"png\"\n" //
 						+ "   else\n" //
 						+ "      set ext to \"jpg\"\n" //
@@ -426,7 +426,7 @@ public class AppleScriptUtil {
 	}
 
 	/**
-	 * This is necessary to convert from "decomposed" string forms which encode "Beyoncé" as "Beyonce´" where the accent
+	 * This is necessary to convert from "decomposed" string forms which encode "Beyonce" as "Beyonce'" where the accent
 	 * is after the character to the "composed" form which is suitable for UTF-8 Java and HTML output.
 	 */
 	private static String fixMacString(String str) {
