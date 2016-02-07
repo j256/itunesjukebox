@@ -8,7 +8,9 @@ according to people's preferences.
 To get this working you can package it as a jar if you'd like by doing:
 
  1. mvn package
- 
+ 2. It will create in the target/ directory something like: itunesjukebox-X.X...-executable.jar
+ 3. Rename that file from the target/ directory to itunesjukebox.jar
+  
 Run the application with:
 
  1. Run the jar with java -jar itunesjukebox.jar
