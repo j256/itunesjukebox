@@ -9,5 +9,6 @@ public class PathConstants {
 
 	public static final String SONGS_ONE = "/songs/one";
 	public static final String ADMIN = "/admin/";
-	public static final String ADMIN_LOGIN = "/admin/login/";
+	public static final String ADMIN_LOGIN = ADMIN + "login/";
+	public static final String ADMIN_PLAYLISTS = ADMIN + "playlists/";
 }

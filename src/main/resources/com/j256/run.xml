@@ -107,6 +107,7 @@
 	</bean>
 	<bean id="songController" class="com.j256.itunesjukebox.web.SongController">
 		<property name="adminController" ref="adminController" />
+		<property name="playListAutomation" ref="playListAutomation" />
 	</bean>
 
 	<!-- =================================================================================== -->

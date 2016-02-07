@@ -70,7 +70,11 @@ public class AdminController {
 			return new ModelView(ViewConstants.ADMIN_ERROR);
 		}
 		session.setAttribute(SessionConstants.ADMIN, "true");
-		return new ModelView("redirect:" + PathConstants.ADMIN);
+		if (tracks == null) {
+			return new ModelView("redirect:" + PathConstants.ADMIN_PLAYLISTS);
+		} else {
+			return new ModelView("redirect:" + PathConstants.ADMIN);
+		}
 	}
 
 	@Path("/playlists/")

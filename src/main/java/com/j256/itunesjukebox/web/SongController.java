@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.j256.itunesjukebox.applescript.Track;
+import com.j256.itunesjukebox.auto.PlayListAutomation;
 import com.j256.simplewebframework.freemarker.ModelView;
 import com.j256.simplewebframework.params.SessionParam;
 
@@ -34,6 +35,7 @@ public class SongController {
 	private static final SortSongByName sortSongByName = new SortSongByName();
 
 	private AdminController adminController;
+	private PlayListAutomation playListAutomation;
 
 	@Path("/")
 	@GET
@@ -67,10 +69,26 @@ public class SongController {
 		return new ModelView(model, ViewConstants.SONGS);
 	}
 
+	@Path("/played")
+	@GET
+	@WebMethod
+	public ModelView played() {
+		List<Track> playedTracks = playListAutomation.getPlayedTracks();
+		if (playedTracks == null) {
+			System.err.println("No tracks returned");
+			return null;
+		}
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("tracks", playedTracks);
+		return new ModelView(model, ViewConstants.SONGS);
+	}
+
 	@Path("/one")
 	@GET
 	@WebMethod
-	public ModelView song(@SessionParam HttpSession session, @QueryParam("id") int id, @Context HttpServletResponse response) {
+	public ModelView song(@SessionParam HttpSession session, @QueryParam("id") int id,
+			@Context HttpServletResponse response) {
 		Track[] trackInfos = adminController.getTracks();
 		Track found = null;
 		for (Track track : trackInfos) {
@@ -93,6 +111,11 @@ public class SongController {
 	@Required
 	public void setAdminController(AdminController adminController) {
 		this.adminController = adminController;
+	}
+
+	@Required
+	public void setPlayListAutomation(PlayListAutomation playListAutomation) {
+		this.playListAutomation = playListAutomation;
 	}
 
 	private void addNoCacheHeaders(HttpServletResponse response) {

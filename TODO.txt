@@ -2,10 +2,9 @@
 - progress bar or other feature to showing track position
 - better css lists (light/dark shading on rows)
 - handle moving off of the playlist better
+	- maybe see what playlist is playing each time and if not tmp then stop
 - show the times of the tracks
 - show the current play time or maybe time left or something
-- fix multiple click buttons on admin page to use common code
-- recently played list
 - some way to persist votes for next time
 	- maybe have a total votes and a working votes for this party
  
