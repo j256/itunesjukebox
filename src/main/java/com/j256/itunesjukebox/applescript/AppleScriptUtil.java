@@ -49,7 +49,10 @@ public class AppleScriptUtil {
 		if (parts.length > 0) {
 			parts[0] = parts[0].substring(2);
 			String last = parts[parts.length - 1];
-			parts[parts.length - 1] = last.substring(0, last.length() - 2);
+			int index = last.indexOf('\"');
+			if (index > 0) {
+				parts[parts.length - 1] = last.substring(0, index);
+			}
 		}
 		List<String> playlists = new ArrayList<String>();
 		for (String part : parts) {

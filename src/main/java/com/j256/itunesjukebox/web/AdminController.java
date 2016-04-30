@@ -56,7 +56,7 @@ public class AdminController {
 	@WebMethod
 	public ModelView login() {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("initialized", (adminPassword != null));
+		model.put("initialized", (tracks != null));
 		return new ModelView(model, ViewConstants.ADMIN_LOGIN);
 	}
 
@@ -88,6 +88,7 @@ public class AdminController {
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("playLists", AppleScriptUtil.listPlayLists());
+		model.put("initialized", false);
 		return new ModelView(model, ViewConstants.PLAYLISTS);
 	}
 

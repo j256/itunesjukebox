@@ -72,7 +72,7 @@ public class RootController {
 		return new BinaryResult(contentType, artwork.getBytes());
 	}
 
-	@Path("/videos.html")
+	@Path("/videos.ftl")
 	@GET
 	@WebMethod
 	public ModelView all() {

@@ -82,6 +82,7 @@
 		<property name="fileExtensionDisplayers">
 			<map>
 				<entry key="html" value-ref="freemarkerHtmlDisplayer" />
+				<entry key="ftl" value-ref="freemarkerHtmlDisplayer" />
 			</map>
 		</property>
 	</bean>
