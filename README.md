@@ -10,13 +10,14 @@ To get this working you can package it as a jar if you'd like by doing:
  1. mvn package
  2. It will create in the target/ directory something like: itunesjukebox-X.X...-executable.jar
  3. Rename that file to itunesjukebox.jar
+ 4. Put all of the songs you want in your party into a playlist in iTunes
   
 Run the application with:
 
- 1. Run the jar with: java -jar itunesjukebox.jar
+ 1. java -jar itunesjukebox.jar
  2. You can override properties using a '-p property-file' argument.  
  3. By default the web-server starts on port 8080 although that can be overridden
- 4. Go to http://localhost:8080 which will encourage you to go to /admin/
+ 4. Go to http://localhost:8080 which will encourage you to choose a playlist.
  5. Enter the admin password for this run of the application.
  6. Choose a playlist to copy from into our temporary playlist.
  7. Get your IP address of your system.

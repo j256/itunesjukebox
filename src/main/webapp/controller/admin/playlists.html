@@ -1,13 +1,10 @@
 [#ftl][#include "/ftl/header.ftl"]
 
-<h1> iTunesJukeBox Admin </h1>
-
-<p> Select a playlist from the below list. </p>
-
-<ul>
-[#list playLists as playList]
-<li> <a href="chosen?playList=${playList}">${playList}</a> </li>
-[/#list]
-</ul>
+<table border="1" cellpadding="3">
+<tr><th> Select playlist to use </th></tr>
+	[#list playLists as playList]
+		<tr><td> <a href="chosen?playList=${playList}">${playList}</a> </td></tr>
+	[/#list]
+</table>
 
 [#include "/ftl/footer.ftl"]
