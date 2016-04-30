@@ -79,8 +79,12 @@ public class SongController {
 			return null;
 		}
 
+		// reverse the order so the most recent played are top of the list
+		List<Track> results = new ArrayList<Track>(playedTracks);
+		Collections.reverse(results);
+
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("tracks", playedTracks);
+		model.put("tracks", results);
 		return new ModelView(model, ViewConstants.SONGS);
 	}
 
