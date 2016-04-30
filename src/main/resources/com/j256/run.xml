@@ -91,7 +91,9 @@
 	<bean id="rootController" class="com.j256.itunesjukebox.web.RootController">
 		<property name="adminController" ref="adminController" />
 	</bean>
-	<bean id="adminController" class="com.j256.itunesjukebox.web.AdminController" />
+	<bean id="adminController" class="com.j256.itunesjukebox.web.AdminController">
+		<property name="tmpPlayList" value="${jukebox.adminController.tmpPlayList}" />
+	</bean>
 	<bean id="artistController" class="com.j256.itunesjukebox.web.ArtistController">
 		<property name="adminController" ref="adminController" />
 	</bean>
