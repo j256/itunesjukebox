@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Definitions of our JMX related beans -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<import resource="classpath:/com/j256/common.xml" />
 
 	<!-- configurer (replaces ${...} with system props) -->
 	<bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -15,7 +12,12 @@
 			</list>
 		</property>
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="valueSeparator" value="?" />
 	</bean>
+
+	<bean id="periodicTaskRunner" class="com.j256.common.spring.PeriodicTaskRunner" />
+
+	<bean id="mainJmx" class="com.j256.common.main.MainJmx" />
 
 	<!-- checks for the @Required annotations -->
 	<bean id="requiredAnnotationBeanPostProcessor" class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
