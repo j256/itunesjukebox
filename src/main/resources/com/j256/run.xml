@@ -15,8 +15,6 @@
 		<property name="valueSeparator" value="?" />
 	</bean>
 
-	<bean id="periodicTaskRunner" class="com.j256.common.spring.PeriodicTaskRunner" />
-
 	<bean id="mainJmx" class="com.j256.common.main.MainJmx" />
 
 	<!-- checks for the @Required annotations -->

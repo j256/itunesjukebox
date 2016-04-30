@@ -17,8 +17,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.j256.common.utils.IOUtils;
-
 /**
  * Utility class which enables Applescript commands to be run.
  * 
@@ -391,7 +389,7 @@ public class AppleScriptUtil {
 				baos.write(buf, 0, numRead);
 			}
 		} finally {
-			IOUtils.closeQuietly(fis);
+			fis.close();
 			inputFile.delete();
 		}
 		return new Artwork(ext, baos.toByteArray());

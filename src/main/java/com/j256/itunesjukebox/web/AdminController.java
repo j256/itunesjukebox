@@ -13,7 +13,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
-import com.j256.common.spring.NotRequired;
 import com.j256.itunesjukebox.applescript.AppleScriptUtil;
 import com.j256.itunesjukebox.applescript.Artwork;
 import com.j256.itunesjukebox.applescript.Track;
@@ -151,7 +150,6 @@ public class AdminController {
 		return tmpPlayList;
 	}
 
-	@NotRequired("Default is " + DEFAULT_TMP_PLAYLIST)
 	public void setTmpPlayList(String tmpPlayList) {
 		this.tmpPlayList = tmpPlayList;
 	}
