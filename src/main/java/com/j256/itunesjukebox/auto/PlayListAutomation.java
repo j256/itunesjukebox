@@ -112,13 +112,13 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 			}
 			if (playingInfo.getId() < 0) {
 				// we aren't playing the right playlist all of a sudden, bail
-				System.err.println("ERROR: We aren't playing in playlist: " + AdminController.TMP_PLAYLIST);
+				System.err.println("ERROR: We aren't playing in playlist: " + adminController.getTmpPlayList());
 				return;
 			}
 			// remove any other tracks before it, adding 1 to their play-count
 			for (int i = 1; i < playingInfo.getIndex(); i++) {
 				// remove the first one X times, not i
-				AppleScriptUtil.removeIndexFromPlaylist(AdminController.TMP_PLAYLIST, 1);
+				AppleScriptUtil.removeIndexFromPlaylist(adminController.getTmpPlayList(), 1);
 				int workingIndex = i - 1;
 				if (workingIndex < lastWorkingTracks.length) {
 					Track justPlayed = lastWorkingTracks[workingIndex];
@@ -154,7 +154,7 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 			Collections.sort(toAdd);
 			for (Track track : toAdd) {
 				AppleScriptUtil.addTrackToPlayList(adminController.getSourcePlayList(), track,
-						AdminController.TMP_PLAYLIST);
+						adminController.getTmpPlayList());
 				System.out.println("Added track: " + track);
 			}
 		}
@@ -162,7 +162,7 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 		// do we have enough tacks in our current playlist?
 		Track[] workingTracks;
 		while (true) {
-			int[] ids = AppleScriptUtil.getIdsPlaylist(AdminController.TMP_PLAYLIST);
+			int[] ids = AppleScriptUtil.getIdsPlaylist(adminController.getTmpPlayList());
 			if (ids == null) {
 				return;
 			}
@@ -181,7 +181,7 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 
 		// now that we have maybe added some tracks to the playlist, see if we need to start the party
 		if (playingInfo == null && AppleScriptUtil.getPlayerState() == PlayerState.STOPPED) {
-			AppleScriptUtil.playPlayList(AdminController.TMP_PLAYLIST);
+			AppleScriptUtil.playPlayList(adminController.getTmpPlayList());
 			System.out.println("Playing out playlist");
 		}
 
@@ -211,7 +211,7 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 			}
 			if (foundBetter) {
 				// if we know that this track is the highest then we throw it to the _end_ of the list, blah
-				AppleScriptUtil.moveIndexToEndOfPlaylist(AdminController.TMP_PLAYLIST, i + 1);
+				AppleScriptUtil.moveIndexToEndOfPlaylist(adminController.getTmpPlayList(), i + 1);
 				System.out.println("Moved track to end: " + track);
 				// shift all of them down one
 				for (int k = i; k < workingTracks.length - 1; k++) {
@@ -293,13 +293,14 @@ public class PlayListAutomation implements InitializingBean, DisposableBean, Run
 
 		if (available.isEmpty()) {
 			AppleScriptUtil.addTrackToPlayList(adminController.getSourcePlayList(), emergencyPick,
-					AdminController.TMP_PLAYLIST);
+					adminController.getTmpPlayList());
 			System.out.println("Added emergency pick: " + emergencyPick);
 			return;
 		}
 
 		Track track = available.remove(random.nextInt(available.size()));
-		AppleScriptUtil.addTrackToPlayList(adminController.getSourcePlayList(), track, AdminController.TMP_PLAYLIST);
+		AppleScriptUtil.addTrackToPlayList(adminController.getSourcePlayList(), track,
+				adminController.getTmpPlayList());
 		System.out.println("Added track: " + track);
 	}
 }

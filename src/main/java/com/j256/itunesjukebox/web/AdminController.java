@@ -13,6 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
+import com.j256.common.spring.NotRequired;
 import com.j256.itunesjukebox.applescript.AppleScriptUtil;
 import com.j256.itunesjukebox.applescript.Artwork;
 import com.j256.itunesjukebox.applescript.Track;
@@ -28,13 +29,15 @@ import com.j256.simplewebframework.params.SessionParam;
 @WebService
 public class AdminController {
 
-	public static final String TMP_PLAYLIST = "iTunesJukeBoxTmp";
+	private static final String DEFAULT_TMP_PLAYLIST = "iTunesJukeBoxTmp";
 	public static final boolean LOAD_ARTWORK_AT_START = false;
 
 	private volatile String adminPassword;
 	private volatile String sourcePlayList;
 	private volatile Track[] tracks;
 	private volatile Map<Integer, Track> trackMap = new HashMap<Integer, Track>();
+
+	private String tmpPlayList = DEFAULT_TMP_PLAYLIST;
 
 	@Path("/")
 	@GET
@@ -98,10 +101,10 @@ public class AdminController {
 		}
 
 		AppleScriptUtil.stop();
-		AppleScriptUtil.createPlayListIfNotExists(TMP_PLAYLIST);
-		AppleScriptUtil.clearPlayList(TMP_PLAYLIST);
-		AppleScriptUtil.disableShuffle(TMP_PLAYLIST);
-		AppleScriptUtil.disableSongRepeat(TMP_PLAYLIST);
+		AppleScriptUtil.createPlayListIfNotExists(tmpPlayList);
+		AppleScriptUtil.clearPlayList(tmpPlayList);
+		AppleScriptUtil.disableShuffle(tmpPlayList);
+		AppleScriptUtil.disableSongRepeat(tmpPlayList);
 
 		sourcePlayList = playList;
 		Track[] tracks = AppleScriptUtil.getTracksFromPlaylist(playList);
@@ -127,7 +130,7 @@ public class AdminController {
 
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("playlist", playList);
-		model.put("tempPlaylist", TMP_PLAYLIST);
+		model.put("tempPlaylist", tmpPlayList);
 		model.put("tracks", tracks);
 		return new ModelView(model, ViewConstants.PLAYLIST_CHOSEN);
 	}
@@ -142,5 +145,14 @@ public class AdminController {
 
 	public Track getTrackById(int id) {
 		return trackMap.get(id);
+	}
+
+	public String getTmpPlayList() {
+		return tmpPlayList;
+	}
+
+	@NotRequired("Default is " + DEFAULT_TMP_PLAYLIST)
+	public void setTmpPlayList(String tmpPlayList) {
+		this.tmpPlayList = tmpPlayList;
 	}
 }
