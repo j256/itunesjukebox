@@ -5,7 +5,7 @@
 	[#list genreTracks as genreTrack]
 		<tr>
 			<td> <a href="/songs/one?id=${genreTrack.id?c}">${genreTrack.name}</a> </td>
-			<td> <a href="/artists/one?name=${genreTrack.artist}">${genreTrack.artist}</a> </td>
+			<td> <a href="/artists/one?name=${genreTrack.artist?url}">${genreTrack.artist}</a> </td>
 		</tr>
 	[/#list]
 </table>
