@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<!-- Pom file used with Maven (http://maven.apache.org/) -->
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- Pom file used with Maven (https://maven.apache.org/) -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.j256.itunesjukebox</groupId>
 	<artifactId>itunesjukebox</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>iTunes Jukebox</name>
+	<name>iTunes Jukebox in Java for controlling itunes on a Mac.</name>
 	<properties>
 		<!-- external package versions -->
 		<commons-lang-version>2.1</commons-lang-version>
 		<joda-time-version>1.5</joda-time-version>
 		<simplejmx-version>1.12</simplejmx-version>
-		<simplewebframework-version>0.1-SNAPSHOT</simplewebframework-version>
-		<log4j-version>1.2.12</log4j-version>
-		<gson-version>1.7.2</gson-version>
-		<spring-version>3.1.0.RELEASE</spring-version>
+		<simplewebframework-version>0.2-SNAPSHOT</simplewebframework-version>
+		<log4j-version>1.2.17</log4j-version>
+		<gson-version>2.8.9</gson-version>
+		<spring-version>5.2.20.RELEASE</spring-version>
 		<commons-lang3-version>3.1</commons-lang3-version>
 		<commons-cli-version>1.1</commons-cli-version>
 		<freemarker-version>2.3.19</freemarker-version>
 
 		<!-- test versions -->
-		<easymock-version>2.3</easymock-version>
-		<easymockclassextension-version>2.3</easymockclassextension-version>
-		<junit-version>4.8.1</junit-version>
+		<easymock-version>3.4</easymock-version>
+		<junit-version>4.13.2</junit-version>
 	</properties>
 	<build>
 		<finalName>itunesjukebox</finalName>
@@ -109,13 +108,13 @@
 						</goals>
 						<configuration>
 							<showPackage>false</showPackage>
-							<additionalparam>-tag inheritDoc:X</additionalparam>
+							<additionalparam>-tag inheritDoc:X -Xdoclint:none</additionalparam>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
 					<showPackage>false</showPackage>
-					<additionalparam>-tag inheritDoc:X</additionalparam>
+					<additionalparam>-tag inheritDoc:X -Xdoclint:none</additionalparam>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -208,12 +207,6 @@
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<version>${easymock-version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymockclassextension</artifactId>
-			<version>${easymockclassextension-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
